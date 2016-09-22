@@ -8,9 +8,13 @@ import (
 	"github.com/cho61183/api/pool"
 )
 
-type Response2 struct {
-	Page   int      `json:"page"`
-	Fruits []string `json:"fruits"`
+type DbInfo struct {
+	Host   string `json:"host"`
+	Port   int    `json:"port"`
+	User   string `json:"user"`
+	Pass   string `json:"pass"`
+	Dbname string `json:"dbname"`
+	Num    int    `json:"num"`
 }
 
 func main() {
@@ -18,11 +22,29 @@ func main() {
 	mysqlconn.Select()
 
 	// 这里是将切片和字典编码为JSON数组或对象
-	str := `{"page": 1, "fruits": ["apple", "peach"]}`
-	res := &Response2{}
+	str := `[{
+       "host": "127.0.0.1",
+       "port": 3306,
+       "user": "root",
+       "pass": "123456",
+       "dbname": "yoyojie_user",
+       "num" : 1
+   	},
+	{
+       "host": "127.0.0.1",
+       "port": 3306,
+       "user": "root",
+       "pass": "123456",
+       "dbname": "yoyojie_user",
+       "num" : 1
+   	}]`
+	var res []DbInfo
 	json.Unmarshal([]byte(str), &res)
-	fmt.Println(res)
-	fmt.Println(res.Fruits[0])
+
+	for _, v := range res {
+		fmt.Println(v)
+	}
+	//fmt.Println(res.Dbname)
 }
 
 func newMysqlConn() *mysql.Conn {
