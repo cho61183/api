@@ -38,7 +38,7 @@ func main() {
        "dbname": "yoyojie_user",
        "num" : 1
    	}]`
-	var res []DbInfo
+	res := []DbInfo{}
 	json.Unmarshal([]byte(str), &res)
 
 	for _, v := range res {
