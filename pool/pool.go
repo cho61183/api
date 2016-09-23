@@ -4,8 +4,6 @@
 package pool
 
 import (
-	"fmt"
-	"reflect"
 	"time"
 )
 
@@ -37,7 +35,7 @@ func (this *Pool) InitPool() error {
 	this.idle = make(chan interface{}, this.MaxActive)
 	for i := 0; i < this.MaxActive; i++ {
 		conn, err := this.Dial()
-		fmt.Println(reflect.TypeOf(conn))
+		//fmt.Println(reflect.TypeOf(conn))
 		if err != nil {
 			return err
 		}
